@@ -111,5 +111,58 @@ namespace FileHandling.Handling
                 Console.WriteLine(Ex.ToString());
             }
         }
+
+        public static void Four()
+        {
+            string fileName = @"C:\Users\rsudha\source\repos\FileHandling\FileHandling\Ratan3.txt";
+            FileInfo fi = new FileInfo(fileName);
+
+            // If file does not exist, create file
+            if (!fi.Exists)
+            {
+                //Create the file.
+                using (FileStream fs = fi.Create())
+                {
+                    Byte[] info = new UTF8Encoding(true).GetBytes("File Start");
+                    fs.Write(info, 0, info.Length);
+                }
+            }
+            try
+            {
+                // Open a file and add some contents to it
+                using (FileStream fs = fi.OpenWrite())
+                {
+                    Byte[] info = new UTF8Encoding(true).GetBytes("New File using OpenWrite Method\n");
+
+
+                    fs.Write(info, 0, info.Length);
+                    info = new UTF8Encoding(true).GetBytes("----------START------------------------\n");
+
+
+                    fs.Write(info, 0, info.Length);
+                    info = new UTF8Encoding(true).GetBytes("Author: Ratan Kumar \n");
+                    fs.Write(info, 0, info.Length);
+                    info = new UTF8Encoding(true).GetBytes("Book: ADO.NET Programming using C#\n");
+                    fs.Write(info, 0, info.Length);
+                    info = new UTF8Encoding(true).GetBytes("----------END------------------------");
+                    fs.Write(info, 0, info.Length);
+                }
+                // Read file contents and display on the console
+                using (FileStream fs = File.OpenRead(fileName))
+                {
+                    byte[] byteArray = new byte[1024];
+                    UTF8Encoding fileContent = new UTF8Encoding(true);
+                    while (fs.Read(byteArray, 0, byteArray.Length) > 0)
+                    {
+                        Console.WriteLine(fileContent.GetString(byteArray));
+                    }
+                }
+            }
+            catch (Exception Ex)
+            {
+                Console.WriteLine(Ex.ToString());
+            }
+
+        }
     }
 }
