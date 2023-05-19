@@ -57,7 +57,7 @@ namespace FileHandling.Handling
                 {
                     fi.Delete();
                 }
-                using(FileStream fs = fi.Create())
+                using (FileStream fs = fi.Create())
                 {
                     Byte[] txt = new UTF8Encoding(true).GetBytes("Hello\n");
                     fs.Write(txt, 0, txt.Length);
@@ -77,6 +77,38 @@ namespace FileHandling.Handling
             catch (Exception e)
             {
                 Console.WriteLine(e.ToString());
+            }
+        }
+
+        public static void Three()
+        {
+            string fileName = @"C:\Users\rsudha\source\repos\FileHandling\FileHandling\Ratan2.txt";
+            FileInfo fi = new FileInfo(fileName);
+            // If file does not exist, create file
+            if (!fi.Exists)
+            {
+                //Create the file.
+                using (FileStream fs = fi.Create())
+                {
+                    Byte[] info = new UTF8Encoding(true).GetBytes("File Start");
+                    fs.Write(info, 0, info.Length);
+                }
+            }
+            try
+            {
+                using (FileStream fs = fi.OpenRead())
+                {
+                    byte[] byteArray = new byte[1024];
+                    UTF8Encoding fileContent = new UTF8Encoding(true);
+                    while (fs.Read(byteArray, 0, byteArray.Length) > 0)
+                    {
+                        Console.WriteLine(fileContent.GetString(byteArray));
+                    }
+                }
+            }
+            catch (Exception Ex)
+            {
+                Console.WriteLine(Ex.ToString());
             }
         }
     }

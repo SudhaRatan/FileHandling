@@ -6,5 +6,6 @@ public class Program
     {
         Example1.One();
         Example1.Two();
+        Example1.Three();
     }
 }
