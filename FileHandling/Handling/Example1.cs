@@ -164,5 +164,35 @@ namespace FileHandling.Handling
             }
 
         }
+
+        public static void Five()
+        {
+            var processes = from p in System.Diagnostics.Process.GetProcesses()
+                            select new {pName = p.ProcessName, pId = p.Id};
+            foreach (var process in processes)
+            {
+                Console.WriteLine(process);
+            }
+        }
+
+        public static async Task<int> LongPro()
+        {
+            Console.WriteLine("======");
+            await Task.Delay(1000);
+            return 10;
+        }
+
+        public static void ShortPro()
+        {
+            Console.WriteLine("------");
+        }
+        public static async void Six()
+        {
+
+            Task<int> res = Example1.LongPro();
+            Example1.ShortPro();
+            var val = await res;
+            Console.WriteLine(val);
+        }
     }
 }

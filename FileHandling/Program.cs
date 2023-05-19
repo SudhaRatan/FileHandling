@@ -8,5 +8,7 @@ public class Program
         Example1.Two();
         Example1.Three();
         Example1.Four();
+        Example1.Five();
+        Example1.Six();
     }
 }
